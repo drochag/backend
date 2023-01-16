@@ -1,5 +1,6 @@
 {
   "extends": ["airbnb"],
+  "jasmine": true,
   "parserOptions": {
     "ecmaFeatures": {
       "jsx": true
