@@ -43,7 +43,7 @@ The exercise requires [Node.js](https://nodejs.org/en/) to be installed. We reco
 
   
 
-1. Then run `npm start` which should start both the server and the React client.
+1. Then run `npm start` which should start both the server and the *React (?)* client.
 
   
 
