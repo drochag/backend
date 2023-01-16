@@ -31,7 +31,7 @@ test('GET /contracts 200 | client', async () => {
   expect(body[0].id).toBe(contracts[0].id)
 })
 
-test('GET /contracts 200 | client', async () => {
+test('GET /contracts 200 | contractor', async () => {
   const { status, body } = await request(app())
     .get('/')
     .set('profile_id', 6)
@@ -45,4 +45,50 @@ test('GET /contracts 200 | client', async () => {
   expect(body.length).toBe(contracts.length)
   expect(typeof body[0]).toBe('object')
   expect(body[0].id).toBe(contracts[0].id)
+})
+
+test('GET /contracts/:id 200 | client', async () => {
+  const { status, body } = await request(app())
+    .get('/2')
+    .set('profile_id', 1)
+
+  const contracts = await Contract.scope('active').findOne({
+    where: { ClientId: 1, id: 2 },
+  })
+
+  expect(status).toBe(200)
+  expect(Array.isArray(body)).toBe(false)
+  expect(typeof body).toBe('object')
+  expect(body.id).toBe(contracts.id)
+})
+
+test('GET /contracts/:id 200 | contractor', async () => {
+  const { status, body } = await request(app())
+    .get('/2')
+    .set('profile_id', 6)
+
+  const contracts = await Contract.scope('active').findOne({
+    where: { ContractorId: 6, id: 2 },
+  })
+
+  expect(status).toBe(200)
+  expect(Array.isArray(body)).toBe(false)
+  expect(typeof body).toBe('object')
+  expect(body.id).toBe(contracts.id)
+})
+
+test('GET /contracts/:id 404 | not owned contract | client', async () => {
+  const { status } = await request(app())
+    .get('/2')
+    .set('profile_id', 2)
+
+  expect(status).toBe(404)
+})
+
+test('GET /contracts/:id 404 | not owned contract | contractor', async () => {
+  const { status } = await request(app())
+    .get('/2')
+    .set('profile_id', 7)
+
+  expect(status).toBe(404)
 })

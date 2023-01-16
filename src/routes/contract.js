@@ -17,7 +17,7 @@ router.get('/:id', getProfile, async (req, res) => {
   const { type, id: profileId } = req.profile
   const { id } = req.params
 
-  const contract = await Contract.scope('active').findAll({
+  const contract = await Contract.scope('active').findOne({
     attributes: { exclude: ['ClientId', 'ContractorId'] },
     where: { [`${capitalize(type)}Id`]: profileId, id },
   })

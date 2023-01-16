@@ -4,6 +4,7 @@ const Sequelize = require('sequelize')
 const sequelize = new Sequelize({
   dialect: 'sqlite',
   storage: './database.sqlite3',
+  // eslint-disable-next-line no-console
   logging: process.env.NODE_ENV === 'development' ? console.log : false,
 })
 
@@ -57,7 +58,7 @@ Contract.init(
           },
         },
       },
-    }
+    },
   },
 )
 
