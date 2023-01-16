@@ -1,6 +1,7 @@
 const events = require('events')
-const EventEmitter = events.EventEmitter
 const seedDb = require('../scripts/seedDb')
+
+const { EventEmitter } = events
 
 EventEmitter.defaultMaxListeners = Infinity
 jest.setTimeout(10000)
