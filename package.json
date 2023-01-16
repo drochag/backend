@@ -22,9 +22,11 @@
     "start": "nodemon ./src/server.js",
     "seed": "node ./scripts/index.js",
     "lint": "eslint ./src --ext .js",
-    "lint:fix": "npm run lint -- --fix"
+    "lint:fix": "npm run lint -- --fix",
+    "docs": "apidoc -i src/ -o docs/"
   },
   "devDependencies": {
+    "apidoc": "^0.53.1",
     "concurrently": "4.1.0",
     "eslint": "^8.32.0",
     "eslint-config-airbnb": "^19.0.4",
