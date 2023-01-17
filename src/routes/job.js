@@ -27,7 +27,7 @@ router.get('/unpaid', getProfile, async (req, res) => {
       required: true,
     }],
   })
-  if (!contracts.length) return res.status(404).end()
+  if (!contracts.length) return res.status(404).send({ error: 'No active contracts found.' })
   res.json(contracts.map(contract => contract.Jobs).flat())
 })
 
@@ -40,15 +40,17 @@ router.get('/unpaid', getProfile, async (req, res) => {
  * @apiParam {String} job_id Job id.
  * @apiSuccess (Sucess 201) {Object} job Job data.
  * @apiError 401 Authenticated access only.
+ * @apiError 402 Insufficient funds.
+ * @apiError 404 Job not found (or job doesn't belong to a contract owned by the client).
  * @apiError 405 Only clients can pay for a job.
- * @apiError 404 Job not found.
+ * @apiError 409 Job already paid.
  */
 router.post('/:job_id/pay', getProfile, async (req, res) => {
   const { Job, Contract, Profile } = req.app.get('models')
   const { id, type } = req.profile
   const { job_id } = req.params
 
-  if (type !== 'client') return res.status(405).end()
+  if (type !== 'client') return res.status(405).send({ error: 'Only clients can pay for a job.' })
 
   const job = await Job.findOne({
     where: { id: job_id },
@@ -67,9 +69,9 @@ router.post('/:job_id/pay', getProfile, async (req, res) => {
     }],
   })
 
-  if (!job) return res.status(404).end()
+  if (!job) return res.status(404).send({ error: 'Job not found or don\t belong to client.' })
+  if (job.Contract.Client.balance < job.price) return res.status(402).send({ error: 'Insufficient funds' })
   if (job.paid) return res.status(409).send({ error: 'Job already paid' })
-  if (job.Contract.Client.balance < job.price) return res.status(402).end()
 
   job.paid = true
   job.paymentDate = new Date()

@@ -12,9 +12,6 @@
     "ecmaVersion": 12,
     "sourceType": "module"
   },
-  "plugins": [
-    "react"
-  ],
   "rules": {
     "consistent-return": 0,
     "import/extensions": 0,

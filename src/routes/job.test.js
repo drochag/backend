@@ -89,7 +89,9 @@ test('POST /jobs/1/pay 200 | client', async () => {
   expect(Array.isArray(body)).toBe(false)
   expect(typeof body).toBe('object')
   expect(body.paid).toBe(true)
+  expect(body.Contract.Client.balance).toBe(950)
   expect(job.Contract.Client.balance).toBe(950)
+  expect(body.Contract.Contractor.balance).toBe(264)
   expect(job.Contract.Contractor.balance).toBe(264)
 })
 
