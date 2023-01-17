@@ -18,7 +18,7 @@
     ]
   },
   "scripts": {
-    "test": "jest -i",
+    "test": "jest -i --runInBand",
     "start": "nodemon ./src/server.js",
     "seed": "node ./scripts/index.js",
     "lint": "eslint ./src --ext .js",

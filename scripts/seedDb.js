@@ -135,31 +135,37 @@ async function seed() {
       ContractorId: 8,
     }),
     Job.create({
+      id: 1,
       description: 'work',
       price: 200,
       ContractId: 1,
     }),
     Job.create({
+      id: 2,
       description: 'work',
       price: 201,
       ContractId: 2,
     }),
     Job.create({
+      id: 3,
       description: 'work',
       price: 202,
       ContractId: 3,
     }),
     Job.create({
+      id: 4,
       description: 'work',
       price: 200,
       ContractId: 4,
     }),
     Job.create({
+      id: 5,
       description: 'work',
       price: 200,
       ContractId: 7,
     }),
     Job.create({
+      id: 6,
       description: 'work',
       price: 2020,
       paid: true,
@@ -167,12 +173,14 @@ async function seed() {
       ContractId: 7,
     }),
     Job.create({
+      id: 7,
       description: 'work',
       price: 2020,
       paid: false,
       ContractId: 2,
     }),
     Job.create({
+      id: 8,
       description: 'work',
       price: 200,
       paid: true,
@@ -180,6 +188,7 @@ async function seed() {
       ContractId: 2,
     }),
     Job.create({
+      id: 9,
       description: 'work',
       price: 200,
       paid: true,
@@ -187,6 +196,7 @@ async function seed() {
       ContractId: 3,
     }),
     Job.create({
+      id: 10,
       description: 'work',
       price: 200,
       paid: true,
@@ -194,6 +204,7 @@ async function seed() {
       ContractId: 1,
     }),
     Job.create({
+      id: 11,
       description: 'work',
       price: 200,
       paid: true,
@@ -201,6 +212,7 @@ async function seed() {
       ContractId: 5,
     }),
     Job.create({
+      id: 12,
       description: 'work',
       price: 21,
       paid: true,
@@ -208,6 +220,7 @@ async function seed() {
       ContractId: 1,
     }),
     Job.create({
+      id: 13,
       description: 'work',
       price: 21,
       paid: true,
@@ -215,6 +228,7 @@ async function seed() {
       ContractId: 2,
     }),
     Job.create({
+      id: 14,
       description: 'work',
       price: 121,
       paid: true,
@@ -222,6 +236,7 @@ async function seed() {
       ContractId: 3,
     }),
     Job.create({
+      id: 15,
       description: 'work',
       price: 121,
       paid: true,
