@@ -10,7 +10,7 @@ const { getProfile } = require('../middleware/getProfile')
 * @apiHeader {String} profile_id User profile_id.
 * @apiSuccess {Object[]} contracts List of contracts belonging to the user.
 * @apiError 401 Authenticated access only.
-* @apiError 404 No contract found.
+* @apiError 404 No contract found or not belonging to the user.
 * @apiParam {Number} id Contract unique ID.
 */
 router.get('/:id', getProfile, get)

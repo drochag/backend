@@ -6,7 +6,7 @@ const job = require('./job')
 
 router.use('/admin', admin)
 router.use('/balances', balances)
-router.use('/contract', contract)
+router.use('/contracts', contract)
 router.use('/job', job)
 
 module.exports = router
