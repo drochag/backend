@@ -1,6 +1,6 @@
 const router = require('express').Router()
+const { get, index } = require('../controllers/contract')
 const { getProfile } = require('../middleware/getProfile')
-const capitalize = require('../utils/capitalize')
 
 /**
 * @api {get} /contracts/:id Retrieve a specific owned contract
@@ -13,19 +13,7 @@ const capitalize = require('../utils/capitalize')
 * @apiError 404 No contract found.
 * @apiParam {Number} id Contract unique ID.
 */
-router.get('/:id', getProfile, async (req, res) => {
-  const { Contract } = req.app.get('models')
-  const { type, id: profileId } = req.profile
-  const { id } = req.params
-
-  const contract = await Contract.scope('active').findOne({
-    attributes: { exclude: ['ClientId', 'ContractorId'] },
-    where: { [`${capitalize(type)}Id`]: profileId, id },
-  })
-
-  if (!contract) return res.status(404).end()
-  res.json(contract)
-})
+router.get('/:id', getProfile, get)
 
 /**
 * @api {get} /contracts Retrieve all owned contracts
@@ -36,15 +24,6 @@ router.get('/:id', getProfile, async (req, res) => {
 * @apiSuccess {Object[]} contracts List of contracts belonging to the user.
 * @apiError 401 Authenticated access only.
 */
-router.get('/', getProfile, async (req, res) => {
-  const { Contract } = req.app.get('models')
-  const { type, id } = req.profile
-
-  const contracts = await Contract.scope('active').findAll({
-    attributes: { exclude: ['ClientId', 'ContractorId'] },
-    where: { [`${capitalize(type)}Id`]: id },
-  })
-  res.json(contracts)
-})
+router.get('/', getProfile, index)
 
 module.exports = router
